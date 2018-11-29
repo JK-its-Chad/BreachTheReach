@@ -229,7 +229,8 @@ MonoBehaviour:
   economicPoints: 0
   TowerTypes:
   - {fileID: 1092354538216058, guid: d38464e4f3c2a334a84409627c49d043, type: 2}
-  - {fileID: 100002, guid: b58036eb4135b7a4db066b194ff0e7bc, type: 3}
+  - {fileID: 1092354538216058, guid: d38464e4f3c2a334a84409627c49d043, type: 2}
+  - {fileID: 1092354538216058, guid: d38464e4f3c2a334a84409627c49d043, type: 2}
 --- !u!4 &54873400
 Transform:
   m_ObjectHideFlags: 0
