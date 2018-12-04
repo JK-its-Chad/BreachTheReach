@@ -38,7 +38,7 @@ public class SoldierAI : MonoBehaviour
             {
                 if (Vector3.Distance(transform.position, duelUnit.transform.position) > 2)
                 {
-                    transform.Translate((transform.position - duelUnit.transform.position).normalized * -speed * Time.deltaTime);
+                    transform.Translate((transform.position - duelUnit.transform.position).normalized * speed * Time.deltaTime);
                     rig.velocity = Vector3.zero;
                 }
                 else if (timer <= 0)

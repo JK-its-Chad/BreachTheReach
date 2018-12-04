@@ -14,34 +14,51 @@ public class EnemyAI : MonoBehaviour {
     public GameObject duelUnit = null;
     bool attacking = false;
     public int health = 100;
-    public float speed = 5;
+    public float speed = 5f;
     public int damage = 5;
-    public float attackTimer = 5;
-    float timer = 1;
-    float sightRange = 3;
+    public float attackTimer = 5f;
+    float timer = 1f;
+    float sightRange = 2f;
 
     bool ignoreTarget = false;
     bool attackTower = false;
     bool dodgeArrows = false;
 
+    bool inAir = false;
+
     Rigidbody rig;
 
-	void Awake ()
+    void Awake()
     {
         rig = GetComponent<Rigidbody>();
         pathList = GameObject.Find("PathList");
         //pathTargets = pathList.GetComponentsInChildren<Transform>();
-		foreach(Transform t in pathList.GetComponentsInChildren<Transform>())
+        foreach (Transform t in pathList.GetComponentsInChildren<Transform>())
         {
             pathTargets.Add(t);
         }
         pathTargets.RemoveAt(0);
         NextTarget();
-	}
+    }
 
     private void Update()
     {
-        if(!duelUnit)
+        if(timer > 0)
+        {
+            timer -= Time.deltaTime;
+        }
+        
+        if (transform.position.y > 30)
+        {
+            inAir = true;
+        }
+        else
+        {
+            inAir = false;
+        }
+
+
+        if (!duelUnit)
         {
             attacking = false;
             Collider[] enemies = Physics.OverlapSphere(transform.position, sightRange, enemyLayer);
@@ -59,13 +76,18 @@ public class EnemyAI : MonoBehaviour {
             Combat();
         }
 
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+        }
+
     }
 
-    void FixedUpdate ()
+    void FixedUpdate()
     {
         if (index <= pathTargets.Count && !attacking)
         {
-            if (Vector3.Distance(transform.position, target) > .5f && index != 12)
+            if (Vector3.Distance(transform.position, target) > .5f && index != 12 && !inAir)
             {
                 rig.AddForce((transform.position - target).normalized * -speed * 100);
             }
@@ -75,13 +97,13 @@ public class EnemyAI : MonoBehaviour {
             NextTarget();
 
         rig.velocity = Vector3.zero;
-	}
+    }
 
     void NextTarget()
     {
         index++;
-        
-        if(index == 11)
+
+        if (index == 11)
         {
             target.x += Random.Range(-20f, 20f);
             target.z += Random.Range(-5f, 5f);
@@ -100,7 +122,6 @@ public class EnemyAI : MonoBehaviour {
     {
         if (health > 0)
         {
-            timer -= Time.deltaTime;
             if (duelUnit)
             {
                 if (Vector3.Distance(transform.position, duelUnit.transform.position) > 2)
@@ -112,7 +133,7 @@ public class EnemyAI : MonoBehaviour {
                 {
                     timer = attackTimer;
                     duelUnit.GetComponent<SoldierAI>().health -= damage;
-                    if(duelUnit.GetComponent<SoldierAI>().health < 0)
+                    if (duelUnit.GetComponent<SoldierAI>().health < 0)
                     {
                         attacking = false;
                         Destroy(duelUnit);
@@ -120,7 +141,7 @@ public class EnemyAI : MonoBehaviour {
                     }
                 }
             }
-            if(!duelUnit)
+            if (!duelUnit)
             {
                 attacking = false;
                 duelUnit = null;
@@ -132,4 +153,16 @@ public class EnemyAI : MonoBehaviour {
             Destroy(gameObject);
         }
     }
+
+    public void DamageGate(ComputerAI com)
+    {
+        if (timer <= 0)
+        {
+            Debug.Log("attack");
+            timer = attackTimer;
+            com.gameObject.GetComponent<ComputerAI>().health -= damage;
+            health -= 10;
+        }
+    }
 }
+
