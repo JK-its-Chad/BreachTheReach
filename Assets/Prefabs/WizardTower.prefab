@@ -1755,7 +1755,7 @@ MonoBehaviour:
   lvl1: {fileID: 1427576723565908}
   lvl2: {fileID: 1860510571028450}
   lvl3: {fileID: 1655097373976812}
-  targetPoint: {fileID: 0}
+  targetPoint: {fileID: 4043499856200364}
   defender:
     serializedVersion: 2
     m_Bits: 1024
@@ -1770,7 +1770,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1794121878908102}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 20

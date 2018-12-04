@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -242,7 +242,7 @@ MonoBehaviour:
   towerPlots: []
   economicPoints: 0
   TowerTypes:
-  - {fileID: 1092354538216058, guid: d38464e4f3c2a334a84409627c49d043, type: 2}
+  - {fileID: 1138926267644476, guid: 3068ecb2cfbca504499c18bfba5730b1, type: 2}
   - {fileID: 1404048719094862, guid: e389f65ee03d9fd4b8fe25b4385aa4e3, type: 2}
   - {fileID: 1613804374162506, guid: 26b33c8b631ed654687c31e12896efc6, type: 2}
 --- !u!4 &54873400

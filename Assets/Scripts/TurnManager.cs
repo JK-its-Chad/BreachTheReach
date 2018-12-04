@@ -130,12 +130,6 @@ public class TurnManager : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            play.OpenUI();
-            timer = 3.00f;
-            readyText.text = "";
-        }
         if (roundRunning)
         {
             enemySpawnTime -= Time.deltaTime;

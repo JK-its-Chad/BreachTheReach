@@ -16,13 +16,28 @@ public class TowerAI : MonoBehaviour {
 
     [SerializeField] GameObject soldier;
 
+    EnemyAI target;
+
     float timerMAX = 5f;
     float timer = 0;
+    int damage = 10;
 
 
-    void Start ()
+    void Start()
     {
         name = me.type + "_lvl: " + me.level;
+        switch (me.type)
+        {
+            case "SoldierTower":
+                timerMAX = 8f;
+                break;
+            case "ArcherTower":
+                timerMAX = 2f;
+                break;
+            case "WizardTower":
+                timerMAX = 5f;
+                break;
+        }
     }
 	
 
@@ -30,14 +45,17 @@ public class TowerAI : MonoBehaviour {
     {
         timer -= Time.deltaTime;
 
-        if (me.level >= 2 && lvl2.activeSelf == false)
-        {
-            lvl2.SetActive(true);
-        }
-        if (me.level >= 3 && lvl3.activeSelf == false)
+        if (me.level >= 3)
         {
             lvl3.SetActive(true);
+            name = me.type + "_lvl: " + me.level;
         }
+        if (me.level >= 2)
+        {
+            lvl2.SetActive(true);
+            name = me.type + "_lvl: " + me.level;
+        }
+
 
         switch(me.type)
         {
@@ -50,19 +68,50 @@ public class TowerAI : MonoBehaviour {
                         GameObject newRecruit = Instantiate(soldier, targetPoint.position + rando, Quaternion.Euler(0, 180, 0)) as GameObject;
                         newRecruit.GetComponent<SoldierAI>().health += me.level * 10;
                         newRecruit.GetComponent<SoldierAI>().damage += me.level;
-                        timer = timerMAX - me.level + 3;
+                        timer = timerMAX - me.level;
                     }
                 }
                 break;
             case "ArcherTower":
                 if(timer <= 0)
                 {
-                    timer = timerMAX - me.level;
+                    foreach (Collider en in Physics.OverlapSphere(targetPoint.position, 20))
+                    {
+                        if (en.gameObject.GetComponent<EnemyAI>())
+                        {
+                            if (!target)
+                            {
+                                target = en.gameObject.GetComponent<EnemyAI>();
+                                if (en.gameObject.GetComponent<EnemyAI>().health < target.health)
+                                {
+                                    target = en.gameObject.GetComponent<EnemyAI>();
+                                }
+                                if (Vector3.Distance(target.transform.position, targetPoint.position) > 20f)
+                                {
+                                    target = null;
+                                }
+                            }
+                        }
+                    }
+                    if(target)
+                    {
+                        target.health -= damage + me.level * 2;
+                        Debug.Log("pew");
+                    }
+                    timer = (timerMAX - 1) / me.level;
                 }
                 break;
             case "WizardTower":
                 if (timer <= 0)
                 {
+                    foreach(Collider en in Physics.OverlapSphere(targetPoint.position, 20))
+                    {
+                        if(en.GetComponent<EnemyAI>())
+                        {
+                            en.gameObject.GetComponent<EnemyAI>().health -= damage + me.level;
+                            en.gameObject.GetComponent<EnemyAI>().slow = me.level;
+                        }
+                    }
                     timer = timerMAX - me.level;
                 }
                 break;

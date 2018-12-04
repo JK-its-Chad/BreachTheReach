@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour {
 
     GameObject pathList;
-    //Transform[] pathTargets;
     [SerializeField] List<Transform> pathTargets;
     Vector3 target;
     int index = -1;
@@ -33,7 +32,6 @@ public class EnemyAI : MonoBehaviour {
     {
         rig = GetComponent<Rigidbody>();
         pathList = GameObject.Find("PathList");
-        //pathTargets = pathList.GetComponentsInChildren<Transform>();
         foreach (Transform t in pathList.GetComponentsInChildren<Transform>())
         {
             pathTargets.Add(t);
@@ -56,6 +54,15 @@ public class EnemyAI : MonoBehaviour {
         else
         {
             inAir = false;
+        }
+
+        if(slow > 0)
+        {
+            slow -= Time.deltaTime / 4;
+        }
+        if(slow < 0)
+        {
+            slow = 0;
         }
 
 
@@ -90,8 +97,8 @@ public class EnemyAI : MonoBehaviour {
         {
             if (Vector3.Distance(transform.position, target) > .5f && index != 12 && !inAir)
             {
-                float calc = speed - slow;
-                rig.AddForce((transform.position - target).normalized * -speed * 100);
+                float calc = speed - (speed * (slow / 10));
+                rig.AddForce((transform.position - target).normalized * -calc * 100);
             }
         }
 
@@ -160,7 +167,6 @@ public class EnemyAI : MonoBehaviour {
     {
         if (timer <= 0)
         {
-            Debug.Log("attack");
             timer = attackTimer;
             com.gameObject.GetComponent<ComputerAI>().health -= damage;
             health -= 10;
