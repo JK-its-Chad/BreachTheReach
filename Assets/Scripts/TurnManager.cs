@@ -6,10 +6,20 @@ public class TurnManager : MonoBehaviour
 {
 
     ComputerAI comp;
+    PlayerAI play;
+
+    [SerializeField] TextMesh readyText;
+    [SerializeField] TextMesh timerText;
+
+    [SerializeField] TextMesh pChoiceS;
+    [SerializeField] TextMesh pChoiceA;
+
+    [SerializeField] TextMesh waveNumber;
+    [SerializeField] TextMesh difficultyNumber;
 
     public int difficulty = 0;
     public int currentRound = 1;
-    float timer = 2f;
+    float timer = 3.00f;
 
     [SerializeField] Transform enemySpawn;
     EnemyAI[] liveEnemies;
@@ -27,40 +37,62 @@ public class TurnManager : MonoBehaviour
     public bool roundOver = false;
     public bool roundRunning = false;
 
+    public bool playerSupport = true;
+    public bool playerAttack = false;
+
 
     void Start()
     {
         comp = GameObject.Find("Computer").GetComponent<ComputerAI>();
+        play = GameObject.Find("PlayerUI").GetComponent<PlayerAI>();
     }
 
 
     void Update()
     {
+        timerText.text = ((int)timer).ToString();
+        waveNumber.text = currentRound.ToString();
+        difficultyNumber.text = difficulty.ToString();
+
+        if(playerAttack && pChoiceA.text != "!")
+        {
+            pChoiceA.text = "!";
+            pChoiceS.text = "";
+        }
+        if (playerSupport && pChoiceS.text != "!")
+        {
+            pChoiceA.text = "";
+            pChoiceS.text = "!";
+        }
+
+
         liveEnemies = GameObject.FindObjectsOfType<EnemyAI>();
         if (liveEnemies.Length <= 3 && roundRunning && groupsSpawned >= groupsPerWave)
         {
             roundRunning = false;
             ready = false;
+            readyText.text = "";
             roundOver = true;
-            comp.health += 10 + (10 * difficulty);
+            currentRound++;
+
+            if(comp.health <= 990 + (10 * difficulty))
+            {
+                comp.health += 10 + (10 * difficulty);
+            }
             comp.economicPoints += 10 + (difficulty * 10);
-            //player gets points to spend based on current round and difficulty
-        }
-        if (roundOver)
-        {
 
-            //Player UI for adding to minions appear
-            //Player UI for choosing role, if final wave ask if ready
-            //
+            play.points += (currentRound * 10) + (difficulty * 5);
+            play.points += 1000 - comp.health;
+            play.OpenUI();
 
-        }
-        else
-        {
-            //hide ui and save changes
+            //set player position to tower
+            //disable monster and wizard scripts
         }
 
-        if (ready)
+        if (ready && roundOver)
         {
+            play.CloseUI();
+            readyText.text = "!";
             minionsMade.Clear();
             if(spot1.GetComponentInChildren<EnemyAI>())
             {
@@ -81,11 +113,28 @@ public class TurnManager : MonoBehaviour
                 roundRunning = true;
                 roundOver = false;
                 ready = false;
-                currentRound++;
-                timer = 1f;
+                readyText.text = "";
+                timer = 3.00f;
                 enemySpawnTime = 0f;
                 groupsSpawned = 0;
+                
+                if(playerAttack)
+                {
+                    //set position
+                    //enable monster script
+                }
+                if(playerSupport)
+                {
+                    //set position
+                    //enable wizard script
+                }
             }
+        }
+        else
+        {
+            play.OpenUI();
+            timer = 3.00f;
+            readyText.text = "";
         }
         if (roundRunning)
         {
@@ -100,6 +149,61 @@ public class TurnManager : MonoBehaviour
                 enemySpawnTime = 1.5f;
                 groupsSpawned++;
             }
+        }
+    }
+
+    public void ReadyUP()
+    {
+        timer = 3.00f;
+        if (!ready && roundOver)
+        {
+            ready = true;
+        }
+        if(ready)
+        {
+            ready = false;
+        }
+    }
+
+    public void playSup()
+    {
+        if(!playerSupport && roundOver)
+        {
+            playerSupport = true;
+            playerAttack = false;
+        }
+        else if(playerSupport)
+        {
+            playerSupport = false;
+            playerAttack = true;
+        }
+    }
+    public void playAtck()
+    {
+        if (!playerAttack && roundOver)
+        {
+            playerSupport = false;
+            playerAttack = true;
+        }
+        else if(playerAttack)
+        {
+            playerSupport = true;
+            playerAttack = false;
+        }
+    }
+
+    public void diffUP()
+    {
+        if (roundOver)
+        {
+            difficulty++;
+        }
+    }
+    public void diffDOWN()
+    {
+        if(difficulty > 0 && roundOver)
+        {
+            difficulty--;
         }
     }
 }

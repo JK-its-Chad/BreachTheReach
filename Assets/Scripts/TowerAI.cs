@@ -28,6 +28,8 @@ public class TowerAI : MonoBehaviour {
 
 	void Update ()
     {
+        timer -= Time.deltaTime;
+
         if (me.level >= 2 && lvl2.activeSelf == false)
         {
             lvl2.SetActive(true);
@@ -42,20 +44,27 @@ public class TowerAI : MonoBehaviour {
             case "SoldierTower":
                 if(Physics.OverlapSphere(targetPoint.position, 5, defender).Length < 3)
                 {
-                    timer -= Time.deltaTime;
                     if(timer <= 0)
                     {
                         Vector3 rando = new Vector3(Random.Range(-2f, 2f), 0, Random.Range(-2f, 2f));
                         GameObject newRecruit = Instantiate(soldier, targetPoint.position + rando, Quaternion.Euler(0, 180, 0)) as GameObject;
                         newRecruit.GetComponent<SoldierAI>().health += me.level * 10;
                         newRecruit.GetComponent<SoldierAI>().damage += me.level;
-                        timer = timerMAX - ((float)me.level / 10);
+                        timer = timerMAX - me.level + 3;
                     }
                 }
                 break;
             case "ArcherTower":
+                if(timer <= 0)
+                {
+                    timer = timerMAX - me.level;
+                }
                 break;
             case "WizardTower":
+                if (timer <= 0)
+                {
+                    timer = timerMAX - me.level;
+                }
                 break;
         }
     }

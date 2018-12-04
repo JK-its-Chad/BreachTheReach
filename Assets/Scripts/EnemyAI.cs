@@ -15,14 +15,15 @@ public class EnemyAI : MonoBehaviour {
     bool attacking = false;
     public int health = 100;
     public float speed = 5f;
+    public float slow = 0f;
     public int damage = 5;
     public float attackTimer = 5f;
     float timer = 1f;
     float sightRange = 2f;
 
-    bool ignoreTarget = false;
-    bool attackTower = false;
-    bool dodgeArrows = false;
+    public bool ignoreTarget = false;
+    public bool attackTower = false;
+    public bool dodgeArrows = false;
 
     bool inAir = false;
 
@@ -76,7 +77,7 @@ public class EnemyAI : MonoBehaviour {
             Combat();
         }
 
-        if(health <= 0)
+        if(health <= 0 && !inAir)
         {
             Destroy(gameObject);
         }
@@ -89,6 +90,7 @@ public class EnemyAI : MonoBehaviour {
         {
             if (Vector3.Distance(transform.position, target) > .5f && index != 12 && !inAir)
             {
+                float calc = speed - slow;
                 rig.AddForce((transform.position - target).normalized * -speed * 100);
             }
         }

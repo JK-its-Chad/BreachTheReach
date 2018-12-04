@@ -39,12 +39,6 @@ public class ComputerAI : MonoBehaviour
         {
             hpBar.text += "|";
         }
-       
-
-        if(economicPoints == 40)
-        {
-            Debug.Log(economicPoints);
-        }
 
 		if(bigBoss.roundOver)
         {
@@ -63,7 +57,7 @@ public class ComputerAI : MonoBehaviour
                 economicPoints -= 30;
                 UpgradeTower2();
             }
-            if (economicPoints > 0 &&  health < 995)
+            if (economicPoints > 0 &&  health <= 995)
             {
                 economicPoints--;
                 health += 5;
