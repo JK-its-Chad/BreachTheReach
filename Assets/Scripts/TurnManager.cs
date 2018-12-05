@@ -133,6 +133,11 @@ public class TurnManager : MonoBehaviour
                 }
             }
         }
+        else if(!ready && roundOver)
+        {
+            timer = 3.00f;
+            readyText.text = "";
+        }
         if (roundRunning)
         {
             enemySpawnTime -= Time.deltaTime;
