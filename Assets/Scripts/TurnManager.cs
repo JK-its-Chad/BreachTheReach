@@ -7,6 +7,7 @@ public class TurnManager : MonoBehaviour
 
     ComputerAI comp;
     PlayerAI play;
+    Player player;
 
     [SerializeField] TextMesh readyText;
     [SerializeField] TextMesh timerText;
@@ -46,6 +47,7 @@ public class TurnManager : MonoBehaviour
     {
         comp = GameObject.Find("Computer").GetComponent<ComputerAI>();
         play = GameObject.Find("PlayerUI").GetComponent<PlayerAI>();
+        player = GameObject.Find("Player").GetComponent<Player>();
     }
 
 
@@ -123,13 +125,11 @@ public class TurnManager : MonoBehaviour
                 
                 if(playerAttack)
                 {
-                    //set position
-                    //enable monster script
+                    player.PlayAttack();
                 }
                 if(playerSupport)
                 {
-                    //set position
-                    //enable wizard script
+                    player.PlaySupport();
                 }
             }
         }
