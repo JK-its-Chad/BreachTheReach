@@ -16,6 +16,7 @@ public class TurnManager : MonoBehaviour
 
     [SerializeField] TextMesh waveNumber;
     [SerializeField] TextMesh difficultyNumber;
+    [SerializeField] TextMesh groupsNumber;
 
     public int difficulty = 0;
     public int currentRound = 1;
@@ -53,6 +54,7 @@ public class TurnManager : MonoBehaviour
         timerText.text = ((int)timer).ToString();
         waveNumber.text = currentRound.ToString();
         difficultyNumber.text = difficulty.ToString();
+        groupsNumber.text = groupsPerWave.ToString();
 
         if(playerAttack && pChoiceA.text != "!")
         {
@@ -74,6 +76,7 @@ public class TurnManager : MonoBehaviour
             readyText.text = "";
             roundOver = true;
             currentRound++;
+            groupsPerWave++;
 
             if(comp.health <= 990 + (10 * difficulty))
             {
@@ -137,7 +140,6 @@ public class TurnManager : MonoBehaviour
             {
                 foreach (GameObject gm in minionsMade)
                 {
-
                     Instantiate(gm, enemySpawn.position + new Vector3(Random.Range(-5f, 5f), 0, Random.Range(-5f, 3f)), Quaternion.identity);
                 }
                 enemySpawnTime = 1.5f;
@@ -198,6 +200,23 @@ public class TurnManager : MonoBehaviour
         if(difficulty > 0 && roundOver)
         {
             difficulty--;
+        }
+    }
+
+    public void groupUP()
+    {
+        if(play.points >= 10 && roundOver)
+        {
+            play.points -= 10;
+            groupsPerWave++;
+        }
+    }
+    public void groupDOWN()
+    {
+        if (groupsPerWave > 1 && roundOver)
+        {
+            play.points += 10;
+            groupsPerWave--;
         }
     }
 }

@@ -19,7 +19,7 @@ public class TowerAI : MonoBehaviour {
     EnemyAI target;
 
     float timerMAX = 5f;
-    float timer = 0;
+    public float timer = 0;
     int damage = 10;
 
 
@@ -95,7 +95,7 @@ public class TowerAI : MonoBehaviour {
                     }
                     if(target)
                     {
-                        target.health -= damage + me.level * 2;
+                        target.health -= (damage + me.level) * 2;
                         Debug.Log("pew");
                     }
                     timer = (timerMAX - 1) / me.level;
@@ -109,7 +109,7 @@ public class TowerAI : MonoBehaviour {
                         if(en.GetComponent<EnemyAI>())
                         {
                             en.gameObject.GetComponent<EnemyAI>().health -= damage + me.level;
-                            en.gameObject.GetComponent<EnemyAI>().slow = me.level;
+                            en.gameObject.GetComponent<EnemyAI>().slow += me.level;
                         }
                     }
                     timer = timerMAX - me.level;

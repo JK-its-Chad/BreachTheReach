@@ -56,13 +56,17 @@ public class EnemyAI : MonoBehaviour {
             inAir = false;
         }
 
-        if(slow > 0)
+        if(slow > .05)
         {
             slow -= Time.deltaTime / 4;
         }
-        if(slow < 0)
+        if(slow >= -.05 && slow <= .05)
         {
             slow = 0;
+        }
+        if(slow < -.05)
+        {
+            slow += Time.deltaTime / 8;
         }
 
 
