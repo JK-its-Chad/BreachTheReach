@@ -159,7 +159,7 @@ public class TurnManager : MonoBehaviour
         {
             ready = true;
         }
-        if(ready)
+        else if(ready && roundOver)
         {
             ready = false;
         }

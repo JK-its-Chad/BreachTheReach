@@ -10,18 +10,12 @@ public class ButtonScript : MonoBehaviour {
 
     public void Click()
     {
-        if(bigBoss && (func == "ReadyUp" || 
+        if(bigBoss && (func == "ReadyUP" || 
             func == "playSup" || func == "playAtck" || 
             func == "diffUP" || func == "diffDOWN" || 
             func == "groupUP" || func == "groupDOWN"))
         {
             bigBoss.Invoke(func, 0);
-            Debug.Log(func);
-        }
-        else
-        {
-            Debug.Log(bigBoss.name);
-            Debug.Log(func);
         }
 
         if(minMan && (func == "hpUP" || func == "hpDown" || 
@@ -31,14 +25,6 @@ public class ButtonScript : MonoBehaviour {
             func == "SwapDodge" || func == "SwapIgnore" || func == "SwapTower"))
         {
             minMan.Invoke(func, 0);
-            Debug.Log(func);
         }
-        else
-        {
-            Debug.Log(minMan.name);
-            Debug.Log(func);
-        }
-
-
     }
 }

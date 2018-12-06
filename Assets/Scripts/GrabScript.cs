@@ -9,7 +9,7 @@ public class GrabScript : MonoBehaviour {
     GameObject grabbedObject;
     bool grabbing;
     public float grabRadius = .13f;
-    public LayerMask potion;
+    public LayerMask grabbable;
     public LayerMask platform;
 
     Quaternion lastRotation;
@@ -20,7 +20,7 @@ public class GrabScript : MonoBehaviour {
         grabbing = true;
 
         RaycastHit[] hits;
-        hits = Physics.SphereCastAll(transform.position, grabRadius, transform.forward, 0f, potion);
+        hits = Physics.SphereCastAll(transform.position, grabRadius, transform.forward, 0f, grabbable);
 
         if (hits.Length > 0)
         {
@@ -46,7 +46,8 @@ public class GrabScript : MonoBehaviour {
             grabbedObject.transform.parent = null;
             grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
 
-            grabbedObject.GetComponent<Rigidbody>().velocity = OVRInput.GetLocalControllerVelocity(controller);
+            if (grabbedObject.layer == 13) { grabbedObject.GetComponent<Rigidbody>().velocity = OVRInput.GetLocalControllerVelocity(controller) * 10; }
+            else { grabbedObject.GetComponent<Rigidbody>().velocity = OVRInput.GetLocalControllerVelocity(controller); }
             grabbedObject.GetComponent<Rigidbody>().angularVelocity = GetAngularVelocity();
 
             grabbedObject = null;
