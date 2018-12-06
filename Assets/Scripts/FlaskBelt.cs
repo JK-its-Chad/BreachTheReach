@@ -11,6 +11,8 @@ public class FlaskBelt : MonoBehaviour {
     [SerializeField] Transform Spot3;
     [SerializeField] Transform Spot4;
 
+    [SerializeField] Transform cam;
+
     float timer1 = 0;
     float timer2 = 0;
     float timer3 = 0;
@@ -24,7 +26,10 @@ public class FlaskBelt : MonoBehaviour {
 
 	void Update ()
     {
-		if(!Spot1.GetComponentInChildren<Flask>())
+        transform.localPosition = new Vector3(cam.localPosition.x, transform.localPosition.y, cam.localPosition.z);
+
+
+        if (!Spot1.GetComponentInChildren<Flask>())
         {
             timer1 -= Time.deltaTime;
             if(timer1 <= 0)

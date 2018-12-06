@@ -41,6 +41,7 @@ public class UIinteract : MonoBehaviour {
         }
         if (Input.GetAxis(buttonName) < 0.9)
         {
+            line.SetPosition(0, start.position);
             line.SetPosition(1, start.position);
         }
     }

@@ -12,13 +12,16 @@ public class Player : MonoBehaviour {
     [SerializeField] GameObject LSheild;
     [SerializeField] GameObject RSheild;
 
+    [SerializeField] GameObject cam;
+
 
     void Start () {
 		
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		
 	}
 

@@ -90,8 +90,7 @@ public class TurnManager : MonoBehaviour
             play.points += 1000 - comp.health;
             play.OpenUI();
 
-            //set player position to tower
-            //disable monster and wizard scripts
+            player.RoundOver();
         }
 
         if (ready && roundOver)
