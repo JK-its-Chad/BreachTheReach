@@ -96,7 +96,6 @@ public class TowerAI : MonoBehaviour {
                     if(target)
                     {
                         target.health -= (damage + me.level) * 2;
-                        Debug.Log("pew");
                     }
                     timer = (timerMAX - 1) / me.level;
                 }

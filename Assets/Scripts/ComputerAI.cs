@@ -39,6 +39,10 @@ public class ComputerAI : MonoBehaviour
         {
             hpBar.text += "|";
         }
+        if(health < 0)
+        {
+            health = 0;
+        }
 
 		if(bigBoss.roundOver)
         {

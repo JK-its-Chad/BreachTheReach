@@ -264,6 +264,7 @@ MonoBehaviour:
   entity:
     serializedVersion: 2
     m_Bits: 3584
+  cloud: {fileID: 1425358148247998, guid: aa2d03141d44213418b1854310cc3aaa, type: 2}
 --- !u!198 &198805521181083248
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -11,8 +11,9 @@ public class Flask : MonoBehaviour {
     [SerializeField] LayerMask ground;
     [SerializeField] LayerMask entity;
 
+    [SerializeField] GameObject cloud;
 
-
+    Color32 gas;
 
     void Awake () {
 
@@ -43,6 +44,11 @@ public class Flask : MonoBehaviour {
                     break;
             }
         }
+
+        if(transform.position.y < -10)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -65,7 +71,11 @@ public class Flask : MonoBehaviour {
                     break;
             }
         }
-
+        GameObject after = Instantiate(cloud, transform.position, Quaternion.identity) as GameObject;
+        gas = potion.GetComponent<MeshRenderer>().material.color;
+        gas.a = 100;
+        after.GetComponent<MeshRenderer>().material.color = gas;
+        Destroy(after, 1f);
         Destroy(gameObject);
     }
 }

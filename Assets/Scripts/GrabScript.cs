@@ -10,7 +10,6 @@ public class GrabScript : MonoBehaviour {
     bool grabbing;
     public float grabRadius = .13f;
     public LayerMask grabbable;
-    public LayerMask platform;
 
     Quaternion lastRotation;
     Quaternion currentRotation;
@@ -30,9 +29,11 @@ public class GrabScript : MonoBehaviour {
                 if (hits[i].distance > hits[closestHit].distance) closestHit = i;
             }
             grabbedObject = hits[closestHit].transform.gameObject;
-            grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
 
+            grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
             grabbedObject.transform.parent = transform;
+            
+
         }
 
     }
@@ -43,13 +44,14 @@ public class GrabScript : MonoBehaviour {
 
         if (grabbedObject != null)
         {
-            grabbedObject.transform.parent = null;
-            grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
 
-            if (grabbedObject.layer == 13) { grabbedObject.GetComponent<Rigidbody>().velocity = OVRInput.GetLocalControllerVelocity(controller) * 10; }
-            else { grabbedObject.GetComponent<Rigidbody>().velocity = OVRInput.GetLocalControllerVelocity(controller); }
-            grabbedObject.GetComponent<Rigidbody>().angularVelocity = GetAngularVelocity();
+                grabbedObject.transform.parent = null;
+                grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
 
+                if (grabbedObject.layer == 13) { grabbedObject.GetComponent<Rigidbody>().velocity = OVRInput.GetLocalControllerVelocity(controller) * 10; }
+                else { grabbedObject.GetComponent<Rigidbody>().velocity = OVRInput.GetLocalControllerVelocity(controller); }
+                grabbedObject.GetComponent<Rigidbody>().angularVelocity = GetAngularVelocity();
+            
             grabbedObject = null;
         }
     }

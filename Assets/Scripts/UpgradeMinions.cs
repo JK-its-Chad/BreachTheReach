@@ -92,17 +92,17 @@ public class UpgradeMinions : MonoBehaviour {
 
     public void atckspdUP()
     {
-        if (play.points >= 10)
+        if (play.points >= 10 && prefab.attackTimer > .1f)
         {
-            prefab.attackTimer += 5;
+            prefab.attackTimer -= .05f;
             play.points -= 10;
         }
     }
     public void atckspdDown()
     {
-        if (prefab.attackTimer >= 5)
+        if (prefab.attackTimer < 1)
         {
-            prefab.attackTimer -= 5;
+            prefab.attackTimer += .05f;
             play.points += 10;
         }
     }

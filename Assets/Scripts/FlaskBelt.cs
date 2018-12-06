@@ -28,7 +28,6 @@ public class FlaskBelt : MonoBehaviour {
     {
         transform.localPosition = new Vector3(cam.localPosition.x, transform.localPosition.y, cam.localPosition.z);
 
-
         if (!Spot1.GetComponentInChildren<Flask>())
         {
             timer1 -= Time.deltaTime;
