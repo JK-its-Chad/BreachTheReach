@@ -16,6 +16,7 @@ public class UIinteract : MonoBehaviour {
     Quaternion lastRotation;
     Quaternion currentRotation;
 
+    float timer = 0;
 
     // Use this for initialization
     void Start ()
@@ -26,17 +27,22 @@ public class UIinteract : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetAxis(buttonName) >= 0.9)
+        timer -= Time.deltaTime;
+        if (Input.GetAxis(buttonName) >= 0.9 )
         {
             line.SetPosition(0, start.position);
             line.SetPosition(1, end.position);
-            RaycastHit hit;
-            if(Physics.Raycast(start.position, start.forward, out hit, 20, button))
+            if(timer <= 0)
             {
-                if (hit.collider.gameObject.GetComponent<ButtonScript>())
+                RaycastHit hit;
+                if (Physics.Raycast(start.position, start.forward, out hit, 20, button))
                 {
-                    hit.collider.gameObject.GetComponent<ButtonScript>().Click();
+                    if (hit.collider.gameObject.GetComponent<ButtonScript>())
+                    {
+                        hit.collider.gameObject.GetComponent<ButtonScript>().Click();
+                    }
                 }
+                timer = 1f;
             }
         }
         if (Input.GetAxis(buttonName) < 0.9)

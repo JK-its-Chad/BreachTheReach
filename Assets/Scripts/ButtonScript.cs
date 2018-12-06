@@ -16,6 +16,7 @@ public class ButtonScript : MonoBehaviour {
             func == "groupUP" || func == "groupDOWN"))
         {
             bigBoss.Invoke(func, 0);
+            Debug.Log(func);
         }
         else
         {
@@ -30,6 +31,7 @@ public class ButtonScript : MonoBehaviour {
             func == "SwapDodge" || func == "SwapIgnore" || func == "SwapTower"))
         {
             minMan.Invoke(func, 0);
+            Debug.Log(func);
         }
         else
         {

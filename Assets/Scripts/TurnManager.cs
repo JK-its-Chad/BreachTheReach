@@ -172,11 +172,6 @@ public class TurnManager : MonoBehaviour
             playerSupport = true;
             playerAttack = false;
         }
-        else if(playerSupport)
-        {
-            playerSupport = false;
-            playerAttack = true;
-        }
     }
     public void playAtck()
     {
@@ -184,11 +179,6 @@ public class TurnManager : MonoBehaviour
         {
             playerSupport = false;
             playerAttack = true;
-        }
-        else if(playerAttack)
-        {
-            playerSupport = true;
-            playerAttack = false;
         }
     }
 
