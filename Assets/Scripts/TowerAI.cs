@@ -113,7 +113,7 @@ public class TowerAI : MonoBehaviour {
                         if(en.GetComponent<EnemyAI>())
                         {
                             en.gameObject.GetComponent<EnemyAI>().health -= damage + me.level;
-                            en.gameObject.GetComponent<EnemyAI>().slow += me.level;
+                            en.gameObject.GetComponent<EnemyAI>().slow = me.level;
                             if(en.gameObject.GetComponent<EnemyAI>().attackTower)
                             {
                                 slowAttack = true;
