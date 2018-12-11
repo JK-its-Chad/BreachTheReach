@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ComputerAI : MonoBehaviour
 {
-    public int health = 1000;
+    public int health = 2000;
     [SerializeField] TextMesh hpBar;
 
     TurnManager bigBoss;
@@ -22,7 +22,7 @@ public class ComputerAI : MonoBehaviour
     void Start ()
     {
         bigBoss = GameObject.Find("Manager").GetComponent<TurnManager>();
-        economicPoints += 30;
+        economicPoints += 50;
         foreach(Transform t in towerSpotList.GetComponentsInChildren<Transform>())
         {
             towerPlots.Add(t);
@@ -64,7 +64,7 @@ public class ComputerAI : MonoBehaviour
             if (economicPoints > 0 &&  health <= 995)
             {
                 economicPoints--;
-                health += 5;
+                health += 10;
             }
         }
 	}

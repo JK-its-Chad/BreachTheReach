@@ -198,9 +198,9 @@ public class TurnManager : MonoBehaviour
 
     public void groupUP()
     {
-        if(play.points >= 10 && roundOver)
+        if(play.points >= 20 && roundOver)
         {
-            play.points -= 10;
+            play.points -= 20;
             groupsPerWave++;
         }
     }
@@ -208,7 +208,7 @@ public class TurnManager : MonoBehaviour
     {
         if (groupsPerWave > 1 && roundOver)
         {
-            play.points += 10;
+            play.points += 20;
             groupsPerWave--;
         }
     }

@@ -27,7 +27,7 @@ public class UpgradeMinions : MonoBehaviour {
         hp.text = prefab.health.ToString();
         dmg.text = prefab.damage.ToString();
         spd.text = prefab.speed.ToString();
-        atckspd.text = prefab.attackTimer.ToString();
+        atckspd.text = prefab.attackTimer.ToString("F2");
 
         if(prefab.dodgeArrows) { dodge.text = "!"; }
         else { dodge.text = ""; }
@@ -75,10 +75,10 @@ public class UpgradeMinions : MonoBehaviour {
 
     public void spdUP()
     {
-        if (play.points >= 10)
+        if (play.points >= 5)
         {
             prefab.speed += 1;
-            play.points -= 10;
+            play.points -= 5;
         }
     }
     public void spdDown()
@@ -86,7 +86,7 @@ public class UpgradeMinions : MonoBehaviour {
         if (prefab.speed > 2)
         {
             prefab.speed -= 1;
-            play.points += 10;
+            play.points += 5;
         }
     }
 

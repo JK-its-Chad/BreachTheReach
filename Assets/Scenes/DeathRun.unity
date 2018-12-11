@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3936538a47741f429cd17e4e89e1c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1000
+  health: 2000
   hpBar: {fileID: 1147497800}
   towers: []
   towerSpotList: {fileID: 928411586}
