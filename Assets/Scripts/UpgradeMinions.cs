@@ -109,41 +109,41 @@ public class UpgradeMinions : MonoBehaviour {
 
     public void SwapDodge()
     {
-        if(!prefab.dodgeArrows && play.points >= 10)
+        if(!prefab.dodgeArrows && play.points >= 25)
         {
             prefab.dodgeArrows = true;
-            play.points -= 10;
+            play.points -= 25;
         }
         else if(prefab.dodgeArrows)
         {
             prefab.dodgeArrows = false;
-            play.points += 10;
+            play.points += 25;
         }
     }
     public void SwapIgnore()
     {
-        if (!prefab.ignoreTarget && play.points >= 10)
+        if (!prefab.ignoreTarget && play.points >= 25)
         {
             prefab.ignoreTarget = true;
-            play.points -= 10;
+            play.points -= 25;
         }
         else if (prefab.ignoreTarget)
         {
             prefab.ignoreTarget = false;
-            play.points += 10;
+            play.points += 25;
         }
     }
     public void SwapTower()
     {
-        if (!prefab.attackTower && play.points >= 10)
+        if (!prefab.attackTower && play.points >= 25)
         {
             prefab.attackTower = true;
-            play.points -= 10;
+            play.points -= 25;
         }
         else if (prefab.attackTower)
         {
             prefab.attackTower = false;
-            play.points += 10;
+            play.points += 25;
         }
     }
 }
