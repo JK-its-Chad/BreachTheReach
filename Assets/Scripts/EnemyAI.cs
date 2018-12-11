@@ -70,7 +70,7 @@ public class EnemyAI : MonoBehaviour {
         }
 
 
-        if (!duelUnit)
+        if (!duelUnit && !ignoreTarget)
         {
             attacking = false;
             Collider[] enemies = Physics.OverlapSphere(transform.position, sightRange, enemyLayer);
@@ -83,7 +83,7 @@ public class EnemyAI : MonoBehaviour {
                 }
             }
         }
-        if (attacking && duelUnit && !ignoreTarget)
+        if (attacking && duelUnit)
         {
             Combat();
         }
@@ -173,7 +173,7 @@ public class EnemyAI : MonoBehaviour {
         {
             timer = attackTimer;
             com.gameObject.GetComponent<ComputerAI>().health -= damage;
-            health -= 10;
+            health -= 25;
         }
     }
 }

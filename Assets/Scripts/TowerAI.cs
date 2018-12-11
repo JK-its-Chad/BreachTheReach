@@ -20,7 +20,7 @@ public class TowerAI : MonoBehaviour {
 
     float timerMAX = 5f;
     public float timer = 0;
-    int damage = 10;
+    int damage = 25;
 
 
     void Start()
@@ -32,10 +32,12 @@ public class TowerAI : MonoBehaviour {
                 timerMAX = 8f;
                 break;
             case "ArcherTower":
+                damage = 25;
                 timerMAX = 2f;
                 break;
             case "WizardTower":
                 timerMAX = 5f;
+                damage = 10;
                 break;
         }
     }
@@ -95,12 +97,12 @@ public class TowerAI : MonoBehaviour {
                     }
                     if(target)
                     {
-                        target.health -= (damage + me.level) * 2;
+                        target.health -= damage + (me.level * 5);
                     }
                     timer = timerMAX / me.level;
                     if (target && target.attackTower)
                     {
-                        timer += timerMAX / 2;
+                        timer += 1;
                     }
                 }
                 break;
@@ -112,8 +114,8 @@ public class TowerAI : MonoBehaviour {
                     {
                         if(en.GetComponent<EnemyAI>())
                         {
-                            en.gameObject.GetComponent<EnemyAI>().health -= damage + me.level;
-                            en.gameObject.GetComponent<EnemyAI>().slow = me.level;
+                            en.gameObject.GetComponent<EnemyAI>().health -= damage + (me.level * 5);
+                            en.gameObject.GetComponent<EnemyAI>().slow = 1 + me.level;
                             if(en.gameObject.GetComponent<EnemyAI>().attackTower)
                             {
                                 slowAttack = true;
@@ -123,7 +125,7 @@ public class TowerAI : MonoBehaviour {
                     timer = timerMAX - me.level;
                     if(slowAttack)
                     {
-                        timer += timerMAX / 2;
+                        timer += 2;
                     }
                 }
                 break;
