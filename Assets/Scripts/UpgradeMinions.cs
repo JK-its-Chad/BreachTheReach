@@ -83,7 +83,7 @@ public class UpgradeMinions : MonoBehaviour {
     }
     public void spdDown()
     {
-        if (prefab.speed > 2)
+        if (prefab.speed > 1)
         {
             prefab.speed -= 1;
             play.points += 5;
