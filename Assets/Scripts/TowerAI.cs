@@ -68,8 +68,8 @@ public class TowerAI : MonoBehaviour {
                     {
                         Vector3 rando = new Vector3(Random.Range(-2f, 2f), 0, Random.Range(-2f, 2f));
                         GameObject newRecruit = Instantiate(soldier, targetPoint.position + rando, Quaternion.Euler(0, 180, 0)) as GameObject;
-                        newRecruit.GetComponent<SoldierAI>().health += me.level * 10;
-                        newRecruit.GetComponent<SoldierAI>().damage += me.level;
+                        newRecruit.GetComponent<SoldierAI>().health += me.level * 25;
+                        newRecruit.GetComponent<SoldierAI>().damage += me.level * 10;
                         timer = timerMAX - me.level;
                     }
                 }
@@ -115,7 +115,7 @@ public class TowerAI : MonoBehaviour {
                         if(en.GetComponent<EnemyAI>())
                         {
                             en.gameObject.GetComponent<EnemyAI>().health -= damage + (me.level * 5);
-                            en.gameObject.GetComponent<EnemyAI>().slow = 1 + me.level;
+                            en.gameObject.GetComponent<EnemyAI>().slow = me.level * 2;
                             if(en.gameObject.GetComponent<EnemyAI>().attackTower)
                             {
                                 slowAttack = true;
