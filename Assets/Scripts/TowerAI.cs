@@ -20,7 +20,7 @@ public class TowerAI : MonoBehaviour {
 
     float timerMAX = 5f;
     public float timer = 0;
-    int damage = 25;
+    public int damage = 25;
 
 
     void Start()

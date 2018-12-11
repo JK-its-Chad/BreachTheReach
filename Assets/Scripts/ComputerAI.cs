@@ -69,6 +69,14 @@ public class ComputerAI : MonoBehaviour
         }
 	}
 
+    public void TowerSurvived()
+    {
+        foreach (GameObject tower in towers)
+        {
+            tower.GetComponent<TowerAI>().damage += 2;
+        }
+    }
+
     void BuyTower()
     {
         int spot = towerPlots.Count - buy;
