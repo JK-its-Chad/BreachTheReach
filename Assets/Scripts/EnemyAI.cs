@@ -83,7 +83,7 @@ public class EnemyAI : MonoBehaviour {
                 }
             }
         }
-        if (attacking && duelUnit)
+        if (attacking && duelUnit && !ignoreTarget)
         {
             Combat();
         }

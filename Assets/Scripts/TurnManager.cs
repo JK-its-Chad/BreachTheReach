@@ -80,14 +80,13 @@ public class TurnManager : MonoBehaviour
             currentRound++;
             groupsPerWave++;
 
-            if(comp.health <= 990 + (10 * difficulty))
+            if(comp.health <= 950 + (20 * difficulty))
             {
-                comp.health += 10 + (10 * difficulty);
+                comp.health += 50 + (20 * difficulty);
             }
-            comp.economicPoints += 10 + (difficulty * 10);
+            comp.economicPoints += 30 + (difficulty * 20);
 
             play.points += (currentRound * 10) + (difficulty * 5);
-            play.points += 1000 - comp.health;
             play.OpenUI();
 
             player.RoundOver();

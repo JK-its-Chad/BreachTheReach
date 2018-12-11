@@ -74,7 +74,7 @@ public class SoldierAI : MonoBehaviour
         Collider[] enemies = Physics.OverlapSphere(transform.position, 3f, enemyLayer);
         foreach(Collider en in enemies)
         {
-            if(!duelUnit)
+            if(!duelUnit && !en.gameObject.GetComponent<EnemyAI>().ignoreTarget)
             {
                 duelUnit = en.gameObject;
             }

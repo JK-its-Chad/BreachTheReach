@@ -97,21 +97,34 @@ public class TowerAI : MonoBehaviour {
                     {
                         target.health -= (damage + me.level) * 2;
                     }
-                    timer = (timerMAX - 1) / me.level;
+                    timer = timerMAX / me.level;
+                    if (target && target.attackTower)
+                    {
+                        timer += timerMAX / 2;
+                    }
                 }
                 break;
             case "WizardTower":
                 if (timer <= 0)
                 {
+                    bool slowAttack = false;
                     foreach(Collider en in Physics.OverlapSphere(targetPoint.position, 20))
                     {
                         if(en.GetComponent<EnemyAI>())
                         {
                             en.gameObject.GetComponent<EnemyAI>().health -= damage + me.level;
                             en.gameObject.GetComponent<EnemyAI>().slow += me.level;
+                            if(en.gameObject.GetComponent<EnemyAI>().attackTower)
+                            {
+                                slowAttack = true;
+                            }
                         }
                     }
                     timer = timerMAX - me.level;
+                    if(slowAttack)
+                    {
+                        timer += timerMAX / 2;
+                    }
                 }
                 break;
         }

@@ -43,15 +43,15 @@ public class UpgradeMinions : MonoBehaviour {
     {
         if(play.points >= 10)
         {
-            prefab.health += 5;
+            prefab.health += 25;
             play.points -= 10;
         }
     }
     public void hpDown()
     {
-        if (prefab.health >= 5)
+        if (prefab.health >= 25)
         {
-            prefab.health -= 5;
+            prefab.health -= 25;
             play.points += 10;
         }
     }
@@ -83,7 +83,7 @@ public class UpgradeMinions : MonoBehaviour {
     }
     public void spdDown()
     {
-        if (prefab.speed >= 3)
+        if (prefab.speed > 2)
         {
             prefab.speed -= 1;
             play.points += 10;
